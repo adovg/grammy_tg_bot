@@ -1,0 +1,16 @@
+{
+  "name": "grammy-tg-bot",
+  "version": "1.0.0",
+  "description": "telegramm bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "grammy": "^1.34.1",
+    "nodemon": "^3.1.9"
+  }
+}
