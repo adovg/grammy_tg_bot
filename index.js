@@ -3,7 +3,29 @@ const { Bot, GrammyError, HttpError } = require("grammy");
 
 const bot = new Bot(process.env.BOT_API_KEY);
 
-bot.start();
+bot.on("message:voice", async (ctx) => {
+  await ctx.reply("Получили голосовое");
+});
+
+bot.hears("ID", async (ctx) => {
+  await ctx.reply(`Ваш ID: ${ctx.from.id}`);
+});
+
+// bot.on("message", async (ctx) => {
+//   console.log(ctx);
+// });
+
+bot.on([":media", "::url"], async (ctx) => {
+  await ctx.reply("Получили ссылку");
+});
+
+bot.hears("пинг", async (ctx) => {
+  await ctx.reply("понг");
+});
+
+bot.hears("тест", async (ctx) => {
+  await ctx.reply("игра");
+});
 
 bot.api.setMyCommands([
   { command: "start", description: "Start bot" },
@@ -16,7 +38,7 @@ bot.command(["say_hello", "hello", "say_hi"], async (ctx) => {
   await ctx.reply("Hello");
 });
 bot.command("start", async (ctx) => {
-  await ctx.reply("Привет, Я - бот. ");
+  await ctx.reply("Игра");
 });
 
 bot.catch((err) => {
@@ -30,6 +52,8 @@ bot.catch((err) => {
     console.error("Could not contact Telegram:", e);
   }
 });
-bot.on("message", async (ctx) => {
-  await ctx.reply("Нужно подумать");
-});
+
+// bot.on("message", async (ctx) => {
+//   await ctx.reply("Нужно подумать");
+// });
+bot.start();
